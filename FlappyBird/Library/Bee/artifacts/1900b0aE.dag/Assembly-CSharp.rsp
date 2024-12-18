@@ -389,6 +389,7 @@
 "Assets/Scripts/Meta.cs"
 "Assets/Scripts/Pipe.cs"
 "Assets/Scripts/PipeSpawner.cs"
+"Assets/Scripts/UI Manager.cs"
 -langversion:9.0
 
 /deterministic

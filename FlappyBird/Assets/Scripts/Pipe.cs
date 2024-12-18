@@ -22,9 +22,12 @@ public class Pipe : MonoBehaviour
 
     void Update()
     {
-        // Mueve la tubería hacia la izquierda
-        transform.Translate(moveSpeed * Time.deltaTime * Vector3.left);
-
+        if (!gm.getGameOver())
+        {
+            // Mueve la tubería hacia la izquierda
+            transform.Translate(moveSpeed * Time.deltaTime * Vector3.left);
+        }
+        
         // Destruye la tubería si sale de la pantalla
         if (transform.position.x < Camera.main.transform.position.x - 10f) // Asegura que la destrucción dependa de la cámara
         {
@@ -40,6 +43,7 @@ public class Pipe : MonoBehaviour
             Debug.Log("Collisió: " + collision.gameObject.name);
             gm.setGameOverTrue();
             bird.triggerHit();
+            
         }
     }
 

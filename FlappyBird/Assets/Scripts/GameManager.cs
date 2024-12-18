@@ -50,4 +50,9 @@ public class GameManager : MonoBehaviour
     {
         score = 0;
     }
+
+    public int getScore()
+    {
+        return score;
+    }
 }
