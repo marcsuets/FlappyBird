@@ -1,5 +1,0 @@
-WebGL:
-https://play.unity.com/en/games/b59d4e54-2fb4-4972-aad4-bb12e37e342e/flappy-bird-by-marc-suets
-
-Repo GitHub:
-https://github.com/marcsuets/FlappyBird
