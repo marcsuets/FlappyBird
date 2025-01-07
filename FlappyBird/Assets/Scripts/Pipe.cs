@@ -18,6 +18,7 @@ public class Pipe : MonoBehaviour
     public void Initialize(float speed)
     {
         moveSpeed = speed;
+        bird = Bird.Instance;
     }
 
     void Update()
@@ -41,10 +42,9 @@ public class Pipe : MonoBehaviour
         if (collision.gameObject.CompareTag("Bird")) // Mejor práctica para comparar etiquetas
         {
             Debug.Log("Collisió: " + collision.gameObject.name);
-            gm.setGameOverTrue();
-            bird.triggerHit();
-            
+            bird.triggerDeath();
+            gm.setGameOver(true);
+            gm.saveBestScore();
         }
     }
-
 }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -16,6 +17,7 @@ public class UIMAnager : MonoBehaviour
     
     void Start()
     {
+        PlayerPrefs.SetInt("BestScore", PlayerPrefs.GetInt("BestScore", 0));
         gm = GameManager.Instance;
         txtGameOverMain.gameObject.SetActive(false);
         txtGameOverScore.gameObject.SetActive(false);
@@ -24,7 +26,6 @@ public class UIMAnager : MonoBehaviour
 
     void Update()
     {
-
         if (gm.getGameOver())
         {
             btnPlayAgain.gameObject.SetActive(true);
@@ -32,9 +33,14 @@ public class UIMAnager : MonoBehaviour
             txtGameOverScore.gameObject.SetActive(true);
             txtGameOverScore.SetText("YOUR SCORE IS " + gm.getScore());
         }
-
+        else
+        {
+            txtGameOverMain.gameObject.SetActive(false);
+            txtGameOverScore.gameObject.SetActive(false);
+            btnPlayAgain.gameObject.SetActive(false);
+        }
         
         txtInGameScore.SetText(gm.getScore().ToString());
-        txtInGameBestScore.SetText("BEST SCORE: " + gm.getScore());
+        txtInGameBestScore.SetText("BEST SCORE: " + PlayerPrefs.GetInt("BestScore"));
     }
 }

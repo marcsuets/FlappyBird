@@ -26,7 +26,7 @@ public class Bird : MonoBehaviour
         else
         {
             Instance = this; // Si no existe, asigna la instancia a esta clase
-            DontDestroyOnLoad(gameObject); // Asegura que el objeto persista entre escenas si es necesario
+            //DontDestroyOnLoad(gameObject); // Asegura que el objeto persista entre escenas si es necesario
         }
     }
 
@@ -43,9 +43,13 @@ public class Bird : MonoBehaviour
     void Update()
     {
         // Detecta si se presiona la tecla espacio o si se hace clic en la pantalla
-        if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
+        if (Input.GetKeyDown(KeyCode.X) || Input.GetMouseButtonDown(0) || (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began))
         {
-            Jump(); // Llama a la función Jump()
+            if (!gm.getGameOver())
+            {
+                gm.PlaySound(3);
+            }
+            Jump();
         }
         
         // Calcula la rotación en función de la velocidad en el eje Y
@@ -76,8 +80,9 @@ public class Bird : MonoBehaviour
         transform.rotation = Quaternion.Euler(0f, 0f, currentRotation);
     }
 
-    public void triggerHit()
+    public void triggerDeath()
     {
+        gm.PlaySound(2);
         animator.SetTrigger("Hit");
     }
 }

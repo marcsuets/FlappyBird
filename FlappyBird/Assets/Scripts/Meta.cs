@@ -23,6 +23,7 @@ public class Meta : MonoBehaviour
         if (other.CompareTag("Bird"))
         {
             gm.incrementScore();
+            gm.PlaySound(1);
         }
     }
 }

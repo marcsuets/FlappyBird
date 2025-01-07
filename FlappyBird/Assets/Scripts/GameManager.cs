@@ -1,4 +1,5 @@
 using System;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -6,6 +7,9 @@ public class GameManager : MonoBehaviour
 {
     private bool gameOver;
     private int score;
+    
+    public AudioSource audioSource; 
+    public AudioClip[] sounds;
     
     public static GameManager Instance { get; private set; }
     
@@ -25,16 +29,10 @@ public class GameManager : MonoBehaviour
         
         score = 0;
     }
-
-    private void Update()
+    
+    public void setGameOver (bool booleanGO)
     {
-        Debug.Log("Game Over: " + gameOver);
-        Debug.Log("Score: " + score);
-    }
-
-    public void setGameOverTrue()
-    {
-        gameOver = true;
+        gameOver = booleanGO;
     }
 
     public bool getGameOver()
@@ -57,8 +55,28 @@ public class GameManager : MonoBehaviour
         return score;
     }
 
-    public void reloadGame()
+    public void saveBestScore()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        if (getScore() > getBestScore())
+        {
+            PlayerPrefs.SetInt("BestScore", getScore());
+        }
+    }
+
+    public int getBestScore()
+    {
+        return PlayerPrefs.GetInt("BestScore");
+    }
+    
+    public void PlaySound(int soundIndex)
+    {
+        if (soundIndex >= 0 && soundIndex < sounds.Length)
+        {
+            audioSource.PlayOneShot(sounds[soundIndex]);
+        }
+        else
+        {
+            Debug.LogWarning("Sound index out of range: " + soundIndex);
+        }
     }
 }
